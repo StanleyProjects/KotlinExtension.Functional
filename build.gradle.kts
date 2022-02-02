@@ -2,7 +2,7 @@ buildscript {
     repositories.mavenCentral()
 
     dependencies {
-    	classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31")
+    	classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Version.kotlin}")
     }
 }
 
@@ -12,6 +12,6 @@ task<Delete>("clean") {
 
 task("getVersionName") {
     doLast {
-        println("0.1")
+        println(Version.name)
     }
 }
