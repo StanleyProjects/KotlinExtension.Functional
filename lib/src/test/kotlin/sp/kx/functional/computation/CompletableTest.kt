@@ -2,8 +2,8 @@ package sp.kx.functional.computation
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import sp.kx.functional.assertType
 import sp.kx.functional.computation.util.completed
 import sp.kx.functional.computation.util.coroutine.completed

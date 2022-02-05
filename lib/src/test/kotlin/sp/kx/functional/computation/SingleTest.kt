@@ -2,15 +2,15 @@ package sp.kx.functional.computation
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import sp.kx.functional.assertType
 import sp.kx.functional.computation.util.coroutine.singled
 import sp.kx.functional.computation.util.singled
 
 class SingleTest {
     companion object {
-        private fun <T: Any> successComputation(value: T): T {
+        private fun <T : Any> successComputation(value: T): T {
             Thread.sleep(250)
             return value
         }

@@ -76,7 +76,7 @@ tasks.getByName<JacocoCoverageVerification>("jacocoTestCoverageVerification") {
         doLast {
             val parent = File(buildDir, "libs")
             if (!parent.exists()) parent.mkdirs()
-            val file = File(parent, "${Maven.artifactId}-${versionName}.pom")
+            val file = File(parent, "${Maven.artifactId}-$versionName.pom")
             if (file.exists()) file.delete()
             val text = MavenUtil.pom(
                 modelVersion = "4.0.0",

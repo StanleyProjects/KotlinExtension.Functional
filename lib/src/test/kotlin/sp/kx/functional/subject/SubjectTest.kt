@@ -16,12 +16,8 @@ class SubjectTest {
             assertNotEquals(unexpected = mutable, actual = bar)
             assertEquals(expected = init, actual = foo)
             assertEquals(expected = init, actual = bar)
-            val fooSubscription = subscribe(Subject.action {
-                foo = it
-            })
-            val barSubscription = subscribe(Subject.action {
-                bar = it
-            })
+            val fooSubscription = subscribe(Subject.action { foo = it })
+            val barSubscription = subscribe(Subject.action { bar = it })
             next(++mutable)
             assertEquals(expected = mutable, actual = foo)
             assertEquals(expected = mutable, actual = bar)

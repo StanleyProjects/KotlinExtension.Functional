@@ -20,4 +20,3 @@ fun <T : Any> singled(block: () -> T): Single<T> {
     }
     return Single.Success(result)
 }
-
