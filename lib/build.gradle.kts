@@ -6,26 +6,28 @@ plugins {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:${Version.jupiter}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${Version.jupiter}")
 }
 
-tasks.getByName<JavaCompile>("compileJava").also {
-    it.targetCompatibility = Version.jvmTarget
+tasks.getByName<JavaCompile>("compileJava") {
+    targetCompatibility = Version.jvmTarget
 }
 
-val compileKotlin: org.jetbrains.kotlin.gradle.tasks.KotlinCompile by tasks
-compileKotlin.kotlinOptions {
-    jvmTarget = Version.jvmTarget
-    freeCompilerArgs = freeCompilerArgs + setOf("-module-name", Maven.groupId + ":" + Maven.artifactId)
+val compileKotlinTask = tasks.getByName<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>("compileKotlin") {
+    kotlinOptions {
+        jvmTarget = Version.jvmTarget
+        freeCompilerArgs = freeCompilerArgs + setOf("-module-name", Maven.groupId + ":" + Maven.artifactId)
+    }
 }
 
-tasks.getByName<JavaCompile>("compileTestJava").also {
-    it.targetCompatibility = Version.jvmTarget
+tasks.getByName<JavaCompile>("compileTestJava") {
+    targetCompatibility = Version.jvmTarget
 }
 
-tasks.getByName<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>("compileTestKotlin").also {
-    it.kotlinOptions.jvmTarget = "1.8"
+tasks.getByName<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>("compileTestKotlin") {
+    kotlinOptions.jvmTarget = Version.jvmTarget
 }
 
 val testTask = tasks.getByName<Test>("test") {
@@ -59,10 +61,10 @@ tasks.getByName<JacocoCoverageVerification>("jacocoTestCoverageVerification") {
 "Snapshot".also { variant ->
     val versionName = Version.name + "-" + variant.toUpperCase()
     task<Jar>("assemble${variant}Jar") {
-        dependsOn(compileKotlin)
+        dependsOn(compileKotlinTask)
         archiveBaseName.set(Maven.artifactId)
         archiveVersion.set(versionName)
-        from(compileKotlin.destinationDirectory.asFileTree)
+        from(compileKotlinTask.destinationDirectory.asFileTree)
     }
     task<Jar>("assemble${variant}Source") {
         archiveBaseName.set(Maven.artifactId)

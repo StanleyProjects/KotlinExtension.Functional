@@ -15,3 +15,9 @@ fun Int?.assertNotNull(): Int {
     if (this == null) error("Impossible!")
     return this
 }
+
+inline fun <reified T : Any> Any.assertType(): T {
+    Assertions.assertTrue(this is T)
+    if (this !is T) error("Impossible!")
+    return this
+}
